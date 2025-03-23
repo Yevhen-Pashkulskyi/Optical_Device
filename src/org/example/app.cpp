@@ -1,22 +1,60 @@
-#include "entity/device.cpp"
+#include "entity/device.h"
 
 int main() {
-    OpticalDevice telescope("SkyWatcher", 900, 100, 3000); // надав критерії
-    telescope.printInfo(); // вивів всі данні що є зараз у об'єкта
+    // використання статичного методу для максимального значення для всіх обєєктів
+    OpticalDevice::set_max_zoom_level(10.0);
+    OpticalDevice telescope("SkyWatcher", 900, 100, 3000);
 
-    telescope.displayImage(telescope.powerOn()); // увімкнув та вивів на екран
-    telescope.displayImage(telescope.adjustZoom(10)); //змінив зум та вивів на екран
-    telescope.printInfo(); // данні о приладі
-    telescope.displayImage(telescope.powerOff()); // вимкнув та вивів на екран
+    int choice;
+    bool running = true;
 
+    while (running) {
+        std::cout << "\n=== Меню управління OpticalDevice ===\n";
+        std::cout << "1. Увімкнути прилад\n";
+        std::cout << "2. Вимкнути прилад\n";
+        std::cout << "3. Змінити збільшення\n";
+        std::cout << "4. Відобразити інформацію\n";
+        std::cout << "5. Копіювати прилад\n";
+        std::cout << "0. Вийти\n";
+        std::cout << "Оберіть дію: ";
+        std::cin >> choice;
 
-    OpticalDevice *copyTelescope = new OpticalDevice(telescope, "WatcherSky");
-    copyTelescope->printInfo(); // данні о приладі
-    //всі подалі дії такі ж самі як у першого телескопу
-    copyTelescope->displayImage(copyTelescope->powerOn());
-    copyTelescope->displayImage(copyTelescope->adjustZoom(30));
-    copyTelescope->printInfo();
-    copyTelescope->displayImage(copyTelescope->powerOff());
-    delete copyTelescope;
+        switch (choice) {
+            case 1: {
+                std::string result = telescope.powerOn();
+                telescope.displayImage(result);
+                break;
+            }
+            case 2: {
+                std::string result = telescope.powerOff();
+                telescope.displayImage(result);
+                break;
+            }
+            case 3: {
+                double zoomLevel;
+                std::cout << "Введіть рівень збільшення: ";
+                std::cin >> zoomLevel;
+                telescope.adjustZoom(zoomLevel);
+                break;
+            }
+            case 4:
+                telescope.printInfo();
+                break;
+            case 5: {
+                OpticalDevice *copyTelescope = new OpticalDevice(telescope, "WatcherSky");
+                std::cout << "Копія створена:\n";
+                copyTelescope->printInfo();
+                delete copyTelescope;
+                break;
+            }
+            case 0:
+                running = false;
+                break;
+            default:
+                std::cout << "Невірний вибір. Спробуйте ще раз.\n";
+                break;
+        }
+    }
+
     return 0;
 }
