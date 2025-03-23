@@ -54,6 +54,9 @@ void OpticalDevice::set_max_zoom_level(double level) {
     max_zoom_level = level;
 }
 
+double OpticalDevice::get_max_zoom_level() {
+    return max_zoom_level;
+}
 //Налаштування маштабу
 
 void OpticalDevice::adjustZoom(double level_zoom) {

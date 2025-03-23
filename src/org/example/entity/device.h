@@ -24,6 +24,7 @@ class OpticalDevice {
     std::string powerOff();
     //статичний метод для всіх об'єктів
     static void set_max_zoom_level(double level);
+    static double get_max_zoom_level();
     void adjustZoom(double level_zoom);
     void displayImage(const std::string &info) const;
     void printInfo() const;

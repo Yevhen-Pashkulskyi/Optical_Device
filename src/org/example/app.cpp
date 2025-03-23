@@ -15,6 +15,7 @@ int main() {
         std::cout << "3. Змінити збільшення\n";
         std::cout << "4. Відобразити інформацію\n";
         std::cout << "5. Копіювати прилад\n";
+        std::cout << "6. Максимальне значення zoom\n";
         std::cout << "0. Вийти\n";
         std::cout << "Оберіть дію: ";
         std::cin >> choice;
@@ -47,6 +48,9 @@ int main() {
                 delete copyTelescope;
                 break;
             }
+            case 6:
+                std::cout << "Max zoom level:" << OpticalDevice::get_max_zoom_level() << std::endl;
+                break;
             case 0:
                 running = false;
                 break;
