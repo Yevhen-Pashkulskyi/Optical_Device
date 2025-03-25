@@ -1,8 +1,9 @@
+/**
+* Головний файл де запускається сама програма
+*/
 #include "entity/device.h"
 
 int main() {
-    // використання статичного методу для максимального значення для всіх обєєктів
-    OpticalDevice::set_max_zoom_level(10.0);
     OpticalDevice telescope("SkyWatcher", 900, 100, 3000);
 
     int choice;
@@ -15,7 +16,8 @@ int main() {
         std::cout << "3. Змінити збільшення\n";
         std::cout << "4. Відобразити інформацію\n";
         std::cout << "5. Копіювати прилад\n";
-        std::cout << "6. Максимальне значення zoom\n";
+        std::cout << "6. Назначити максимальне значення zoom\n";
+        std::cout << "7. Максимальне значення zoom\n";
         std::cout << "0. Вийти\n";
         std::cout << "Оберіть дію: ";
         std::cin >> choice;
@@ -49,7 +51,15 @@ int main() {
                 break;
             }
             case 6:
-                std::cout << "Max zoom level:" << OpticalDevice::get_max_zoom_level() << std::endl;
+                // використання статичного методу для максимального значення для всіх обєєктів
+                double zoomLevel;
+                std::cout << "Введіть число: ";
+                std::cin >> zoomLevel;
+                OpticalDevice::set_max_zoom_level(zoomLevel);
+                std::cout << "Max zoom level:" << OpticalDevice::get_max_zoom_level() << "x" << std::endl;
+                break;
+            case 7:
+                std::cout << "Max zoom level:" << OpticalDevice::get_max_zoom_level() << "x" << std::endl;
                 break;
             case 0:
                 running = false;
