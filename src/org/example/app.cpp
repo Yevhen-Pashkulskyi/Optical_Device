@@ -6,6 +6,7 @@
 
 int main() {
    Camera camera("Canon", 50, 35, 800, 24.1, "Auto");
+   OpticalBase* basePtr = &camera;
 
    int choice;
    bool running = true;
@@ -26,13 +27,13 @@ int main() {
 
       switch (choice) {
       case 1: {
-         std::string result = camera.powerOn();
-         camera.displayImage(result);
+         std::string result = basePtr->powerOn();
+         basePtr->displayImage(result);
          break;
       }
       case 2: {
-         std::string result = camera.powerOff();
-         camera.displayImage(result);
+         std::string result = basePtr->powerOff();
+         basePtr->displayImage(result);
          break;
       }
       case 3: {

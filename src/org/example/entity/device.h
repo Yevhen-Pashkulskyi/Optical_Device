@@ -1,5 +1,5 @@
 /**
-* Цей файл для об'явлення класу OpticalDevice з його атрибутами, конструкторами та функціями
+ * Цей файл для оголошення абстрактного класу OpticalBase та похідних класів
  */
 
 #ifndef DEVICE_H
@@ -8,41 +8,59 @@
 #include <iostream>
 #include <string>
 
-class OpticalDevice {
-   char *modelName; // назва девайсу
-   double focalLength; // фокусна відстань
-   double aperture; // діаметр апертури
-   double weight; // вага
-   double currentZoom; // поточний рівень збільшення
-   static double max_zoom_level; // максимальне збільшення статична змінна
+class OpticalBase {
 protected:
-   bool isPoweredOn; // стан ввімкнено/вимкнено
+    char *modelName; // назва девайсу
+    double focalLength; // фокусна відстань
+    double aperture; // діаметр апертури
+    double weight; // вага
+    bool isPoweredOn; // стан ввімкнено/вимкнено
 
 public:
-   OpticalDevice(const char *model, double focalLength, double aperture, double wt);
-   OpticalDevice(const OpticalDevice &other, const char *name);
-   ~OpticalDevice();
-   std::string powerOn();
-   std::string powerOff();
-   // статичний метод для всіх об'єктів
-   static void set_max_zoom_level(double level);
-   static double get_max_zoom_level();
-   void adjustZoom(double level_zoom);
-   void displayImage(const std::string &info) const;
-   void printInfo() const;
+    OpticalBase(const char *model, double focalLength, double aperture, double wt);
+    OpticalBase(const OpticalBase &other, const char *name);
+    virtual ~OpticalBase();
+    virtual std::string powerOn(); // Віртуальний метод
+    virtual std::string powerOff(); // Віртуальний метод
+    virtual void displayImage(const std::string &info) const; // Віртуальний метод
+    virtual void printInfo() const = 0; // Чиста віртуальна функція
+    virtual void configureDevice() = 0; // Чиста віртуальна функція
+};
+
+class OpticalDevice : public OpticalBase {
+protected:
+    double currentZoom; // поточний рівень збільшення
+    static double max_zoom_level; // максимальне збільшення
+
+public:
+    OpticalDevice(const char *model, double focalLength, double aperture, double wt);
+    OpticalDevice(const OpticalDevice &other, const char *name);
+    ~OpticalDevice() override;
+    std::string powerOn() override;
+    std::string powerOff() override;
+    void displayImage(const std::string &info) const override;
+    void printInfo() const override;
+    void configureDevice() override;
+    static void set_max_zoom_level(double level);
+    static double get_max_zoom_level();
+    void adjustZoom(double level_zoom);
 };
 
 class Camera : public OpticalDevice {
-   double megapixels; // кількість мегапікселів
-   char *shootingMode; // режим зйомки (наприклад, авто, портрет, нічний)
+    double megapixels; // кількість мегапікселів
+    char *shootingMode; // режим зйомки
 
 public:
-   Camera(const char *model, double focalLength, double aperture, double wt, double mp, const char *mode);
-   Camera(const Camera &other, const char *name);
-   ~Camera();
-   void capturePhoto() const; // новий метод для зйомки фотографії
-   void setShootingMode(const char *mode); // метод для зміни режиму зйомки
-   void printInfo() const; // перевизначений метод для відображення додаткової інформації
+    Camera(const char *model, double focalLength, double aperture, double wt, double mp, const char *mode);
+    Camera(const Camera &other, const char *name);
+    ~Camera() override;
+    std::string powerOn() override;
+    std::string powerOff() override;
+    void displayImage(const std::string &info) const override;
+    void printInfo() const override;
+    void configureDevice() override;
+    void capturePhoto() const;
+    void setShootingMode(const char *mode);
 };
 
 #endif
