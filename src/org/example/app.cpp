@@ -1,6 +1,8 @@
 /**
  * Головний файл де запускається сама програма
  */
+#include <iostream>
+
 #include "entity/device.h"
 #include <string>
 

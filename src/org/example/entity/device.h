@@ -1,11 +1,11 @@
 /**
-* Цей файл для об'явлення класу OpticalDevice з його атрибутами, конструкторами та функціями
+* Цей файл для об'явлення класу OpticalDevice з його атрибутами,
+* конструкторами та методами, та PhotoCamera з свойми атрибутами та методами.
  */
 
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include <iostream>
 #include <string>
 
 class OpticalDevice {
