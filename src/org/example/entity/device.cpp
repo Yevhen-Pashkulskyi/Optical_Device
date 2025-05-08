@@ -146,27 +146,27 @@ void OpticalDevice::adjustZoom(double level_zoom)
 
 // --- Camera ---
 
-Camera::Camera(const char* model, double focal, double ap, double wt, double mp, const char* mode)
+PhotoCamera::PhotoCamera(const char* model, double focal, double ap, double wt, double mp, const char* mode)
     : OpticalDevice(model, focal, ap, wt), megapixels(mp)
 {
     shootingMode = new char[strlen(mode) + 1];
     strcpy(shootingMode, mode);
 }
 
-Camera::Camera(const Camera& other, const char* name)
+PhotoCamera::PhotoCamera(const PhotoCamera& other, const char* name)
     : OpticalDevice(other, name), megapixels(other.megapixels)
 {
     shootingMode = new char[strlen(other.shootingMode) + 1];
     strcpy(shootingMode, other.shootingMode);
 }
 
-Camera::~Camera()
+PhotoCamera::~PhotoCamera()
 {
     std::cout << "Режим зйомки " << shootingMode << " видалено" << std::endl;
     delete [] shootingMode;
 }
 
-std::string Camera::powerOn()
+std::string PhotoCamera::powerOn()
 {
     isPoweredOn = true;
     currentZoom = 1.0;
@@ -174,14 +174,14 @@ std::string Camera::powerOn()
     return std::string(modelName) + " увімкнено. Зум і режим зйомки ініціалізовано.";
 }
 
-std::string Camera::powerOff()
+std::string PhotoCamera::powerOff()
 {
     isPoweredOn = false;
     currentZoom = 0.0;
     return std::string(modelName) + " вимкнено. Зум скинуто.";
 }
 
-void Camera::displayImage(const std::string& info) const
+void PhotoCamera::displayImage(const std::string& info) const
 {
     using namespace std;
     if (isPoweredOn) {
@@ -195,7 +195,7 @@ void Camera::displayImage(const std::string& info) const
     }
 }
 
-void Camera::printInfo() const
+void PhotoCamera::printInfo() const
 {
     OpticalDevice::printInfo();
     std::string quality;
@@ -212,14 +212,14 @@ void Camera::printInfo() const
               << "Режим зйомки: " << shootingMode << " (якість: " << quality << ")\n" << std::endl;
 }
 
-void Camera::configureDevice()
+void PhotoCamera::configureDevice()
 {
     currentZoom = 1.0;
     setShootingMode("Auto");
     std::cout << modelName << ": Конфігурація завершена. Зум = 1.0x, Режим зйомки = Auto." << std::endl;
 }
 
-void Camera::capturePhoto() const
+void PhotoCamera::capturePhoto() const
 {
     if (isPoweredOn) {
         std::string quality;
@@ -244,7 +244,7 @@ void Camera::capturePhoto() const
     }
 }
 
-void Camera::setShootingMode(const char *mode)
+void PhotoCamera::setShootingMode(const char *mode)
 {
     delete [] shootingMode;
     shootingMode = new char[strlen(mode) + 1];

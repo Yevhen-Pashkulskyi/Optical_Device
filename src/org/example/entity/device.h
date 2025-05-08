@@ -5,7 +5,6 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include <iostream>
 #include <string>
 
 class OpticalBase {
@@ -47,14 +46,14 @@ public:
     void adjustZoom(double level_zoom);
 };
 
-class Camera : public OpticalDevice {
+class PhotoCamera : public OpticalDevice {
     double megapixels; // кількість мегапікселів
     char *shootingMode; // режим зйомки
 
 public:
-    Camera(const char *model, double focalLength, double aperture, double wt, double mp, const char *mode);
-    Camera(const Camera &other, const char *name);
-    ~Camera() override;
+    PhotoCamera(const char *model, double focalLength, double aperture, double wt, double mp, const char *mode);
+    PhotoCamera(const PhotoCamera &other, const char *name);
+    ~PhotoCamera() override;
     std::string powerOn() override;
     std::string powerOff() override;
     void displayImage(const std::string &info) const override;

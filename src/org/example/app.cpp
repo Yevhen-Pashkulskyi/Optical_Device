@@ -1,11 +1,13 @@
 /**
  * Головний файл де запускається сама програма
  */
+#include <iostream>
+
 #include "entity/device.h"
 #include <string>
 
 int main() {
-   Camera camera("Canon", 50, 35, 800, 24.1, "Auto");
+   PhotoCamera camera("Canon", 50, 35, 800, 24.1, "Auto");
    OpticalBase* basePtr = &camera;
 
    int choice;
@@ -48,7 +50,7 @@ int main() {
          break;
       }
       case 5: {
-         Camera* copyCamera = new Camera(camera, "CopiedCamera");
+         PhotoCamera* copyCamera = new PhotoCamera(camera, "CopiedCamera");
          std::cout << "Копія камери створена:\n";
          copyCamera->printInfo();
          delete copyCamera;
@@ -58,12 +60,12 @@ int main() {
          double zoomLevel;
          std::cout << "Введіть число: ";
          std::cin >> zoomLevel;
-         Camera::set_max_zoom_level(zoomLevel);
-         std::cout << "Max zoom level: " << Camera::get_max_zoom_level() << "x" << std::endl;
+         PhotoCamera::set_max_zoom_level(zoomLevel);
+         std::cout << "Max zoom level: " << PhotoCamera::get_max_zoom_level() << "x" << std::endl;
          break;
       }
       case 7: {
-         std::cout << "Max zoom level: " << Camera::get_max_zoom_level() << "x" << std::endl;
+         std::cout << "Max zoom level: " << PhotoCamera::get_max_zoom_level() << "x" << std::endl;
          break;
       }
       case 8: {
@@ -102,6 +104,5 @@ int main() {
          break;
       }
    }
-
    return 0;
 }
