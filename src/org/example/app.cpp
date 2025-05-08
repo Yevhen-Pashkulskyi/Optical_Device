@@ -51,7 +51,7 @@ int main() {
          Camera* copyCamera = new Camera(camera, "CopiedCamera");
          std::cout << "Копія камери створена:\n";
          copyCamera->printInfo();
-         delete copyCamera; // Видаляємо копію одразу
+         delete copyCamera;
          break;
       }
       case 6: {
