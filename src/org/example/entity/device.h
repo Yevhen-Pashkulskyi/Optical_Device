@@ -32,14 +32,14 @@ public:
    void printInfo() const;
 };
 
-class Camera : public OpticalDevice {
+class PhotoCamera : public OpticalDevice {
    double megapixels; // кількість мегапікселів
    char *shootingMode; // режим зйомки (наприклад, авто, портрет, нічний)
 
 public:
-   Camera(const char *model, double focalLength, double aperture, double wt, double mp, const char *mode);
-   Camera(const Camera &other, const char *name);
-   ~Camera();
+   PhotoCamera(const char *model, double focalLength, double aperture, double wt, double mp, const char *mode);
+   PhotoCamera(const PhotoCamera &other, const char *name);
+   ~PhotoCamera();
    void capturePhoto() const; // новий метод для зйомки фотографії
    void setShootingMode(const char *mode); // метод для зміни режиму зйомки
    void printInfo() const; // перевизначений метод для відображення додаткової інформації

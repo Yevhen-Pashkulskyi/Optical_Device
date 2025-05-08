@@ -117,7 +117,7 @@ void OpticalDevice::printInfo() const
 // Реалізація методів класу Camera
 
 // Конструктор з параметрами
-Camera::Camera(const char* model, double focal, double ap, double wt, double mp, const char* mode)
+PhotoCamera::PhotoCamera(const char* model, double focal, double ap, double wt, double mp, const char* mode)
     : OpticalDevice(model, focal, ap, wt), megapixels(mp)
 {
     shootingMode = new char[strlen(mode) + 1];
@@ -125,7 +125,7 @@ Camera::Camera(const char* model, double focal, double ap, double wt, double mp,
 }
 
 // Конструктор копіювання
-Camera::Camera(const Camera& other, const char* name)
+PhotoCamera::PhotoCamera(const PhotoCamera& other, const char* name)
     : OpticalDevice(other, name), megapixels(other.megapixels)
 {
     shootingMode = new char[strlen(other.shootingMode) + 1];
@@ -133,13 +133,13 @@ Camera::Camera(const Camera& other, const char* name)
 }
 
 // Деструктор
-Camera::~Camera()
+PhotoCamera::~PhotoCamera()
 {
     delete [] shootingMode;
 }
 
 // Метод для зйомки фотографії
-void Camera::capturePhoto() const
+void PhotoCamera::capturePhoto() const
 {
     if (isPoweredOn) {
         // Симуляція зйомки з урахуванням shootingMode і megapixels
@@ -166,7 +166,7 @@ void Camera::capturePhoto() const
 }
 
 // Метод для зміни режиму зйомки
-void Camera::setShootingMode(const char *mode)
+void PhotoCamera::setShootingMode(const char *mode)
 {
     // Звільняємо попередній режим
     delete [] shootingMode;
@@ -177,7 +177,7 @@ void Camera::setShootingMode(const char *mode)
 }
 
 // Перевизначений метод printInfo
-void Camera::printInfo() const
+void PhotoCamera::printInfo() const
 {
     OpticalDevice::printInfo();
     std::string quality;
