@@ -242,19 +242,25 @@ bool caseInsensitiveCompare(const string& a, const string& b){
 }
 
 void CameraController::findDeviceByCriteria(){
+   if (devices.empty()){
+      cout << "\nКонтейнер пуст\n";
+      return;
+   }
    std::cout << "Введіть назву модели для пошуку: ";
    cin.ignore(10000, '\n');
    string modelName;
    getline(cin, modelName);
+
    bool found = false;
+
    for (const auto& device : devices){
-      if (caseInsensitiveCompare(device->getModelName(), modelName)){
+      if (device->getModelName().c_str() == modelName){
          device->printInfo();
          found = true;
          break;
       }
-      if (!found){ cout << "Пристрої " << modelName << " не знайдено!"; }
    }
+   if (!found){ cout << "Пристрої " << modelName << " не знайдено!"; }
 }
 
 void CameraController::sortDeviceByAttribute(){
