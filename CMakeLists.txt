@@ -12,8 +12,8 @@ add_executable(Optical_Device src/org/example/app.cpp
         src/org/example/control/CameraController.h
         src/org/example/view/View.cpp
         src/org/example/view/View.h
-        src/org/example/entity/OpticalDevice.cpp
-        src/org/example/entity/OpticalDevice.h
-        src/org/example/entity/PhotoCamera.cpp
-        src/org/example/entity/PhotoCamera.h
+        src/org/example/entity/extends/OpticalDevice.cpp
+        src/org/example/entity/extends/OpticalDevice.h
+        src/org/example/entity/extends/PhotoCamera.cpp
+        src/org/example/entity/extends/PhotoCamera.h
 )

@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
+#include <memory>
+#include <vector>
+#include <functional>
 #include "CameraController.h"
+#include <cctype>
 
 #include "../view/View.h"
 using namespace std;
@@ -31,80 +35,243 @@ double safeInputDouble(){
 
 int CameraController::run(){
    bool running = true;
-   View view;
 
    while (running){
-      view.show_menu_camera();
+      view.showMenuAddedDevice();
       int choice = safeInputInt();
       switch (choice){
-      case 1: {
-         string result = basePtr->powerOn();
-         basePtr->displayImage(result);
+      case 1: addDeviceFront();
          break;
-      }
-      case 2: {
-         string result = basePtr->powerOff();
-         basePtr->displayImage(result);
+      case 2: addDeviceBack();
          break;
-      }
-      case 3: {
-         double zoomLevel;
-         cout << "Введіть рівень збільшення: ";
-         zoomLevel = safeInputDouble();
-         camera.adjustZoom(zoomLevel);
+      case 3: addDeviceAtPosition();
          break;
-      }
-      case 4: {
-         camera.printInfo();
+      case 4: findDeviceByCriteria();
          break;
-      }
-      case 5: {
-         PhotoCamera* copyCamera = new PhotoCamera(camera, "CopiedCamera");
-         cout << "Копія камери створена:\n";
-         copyCamera->printInfo();
-         delete copyCamera;
+      case 5: sortDeviceByAttribute();
          break;
-      }
-      case 6: {
-         double zoomLevel;
-         cout << "Введіть число: ";
-         zoomLevel = safeInputDouble();
-         PhotoCamera::set_max_zoom_level(zoomLevel);
-         cout << "Max zoom level: " << PhotoCamera::get_max_zoom_level() << "x" << endl;
+      case 6: handleDisplayDevices();
          break;
-      }
-      case 7: {
-         cout << "Max zoom level: " << PhotoCamera::get_max_zoom_level() << "x" << endl;
-         break;
-      }
-      case 8: {
-         camera.capturePhoto();
-         break;
-      }
-      case 9: {
-         view.show_menu_camera_shoting_mode();
-         int modeChoice;
-         cin >> modeChoice;
-         switch (modeChoice){
-         case 1:
-            camera.setShootingMode("Auto");
-            break;
-         case 2:
-            camera.setShootingMode("Portrait");
-            break;
-         case 3:
-            camera.setShootingMode("Night");
-            break;
-         default:
-            cout << "Невірний вибір режиму. Залишено поточний режим.\n";
-            break;
-         }
-         break;
-      }
       case 0:
          running = false;
          break;
       }
    }
    return 0;
+}
+
+void CameraController::handlePowerOn(){
+   string result = basePtr->powerOn();
+   basePtr->displayImage(result);
+}
+
+void CameraController::handlePowerOff(){
+   string result = basePtr->powerOff();
+   basePtr->displayImage(result);
+}
+
+void CameraController::handleAdjustZoom(){
+   double zoomLevel;
+   cout << "Введіть рівень збільшення: ";
+   zoomLevel = safeInputDouble();
+   camera.adjustZoom(zoomLevel);
+}
+
+void CameraController::handlePrintInfo(){ camera.printInfo(); }
+
+void CameraController::handleCopyCamera(){
+   PhotoCamera* copyCamera = new PhotoCamera(camera, "CopiedCamera");
+   cout << "Копія камери створена:\n";
+   copyCamera->printInfo();
+   delete copyCamera;
+}
+
+void CameraController::handleSetMaxZoom(){
+   double zoomLevel;
+   cout << "Введіть число: ";
+   zoomLevel = safeInputDouble();
+   PhotoCamera::set_max_zoom_level(zoomLevel);
+   cout << "Max zoom level: " << PhotoCamera::get_max_zoom_level() << "x" << endl;
+}
+
+void CameraController::handleGetMaxZoom(){
+   cout << "Max zoom level: " << PhotoCamera::get_max_zoom_level() << "x" << endl;
+}
+
+void CameraController::handleCapturePhoto(){ camera.capturePhoto(); }
+
+void CameraController::handleSetShootingMode(){
+   view.showMenuCameraShootingMode();
+   int modeChoice = safeInputInt();
+   switch (modeChoice){
+   case 1: camera.setShootingMode("Auto");
+      break;
+   case 2: camera.setShootingMode("Portrait");
+      break;
+   case 3: camera.setShootingMode("Night");
+      break;
+   default: cout << "Невірний вибір режиму. Залишено поточний режим.\n";
+      break;
+   }
+}
+
+void CameraController::handleDisplayDevices(){ displayDevices(); }
+
+void CameraController::addDeviceFront(){
+   view.showTypeMenu();
+   int typeChoice = safeInputInt();
+   if (typeChoice == 1){
+      string modelName;
+      double focal, aperture, weight, megapixeles;
+      cout << "Введіть модель: ";
+      cin >> modelName;
+      cout << "Введіть фокусну відстань: ";
+      focal = safeInputDouble();
+      cout << "Введіть апертуру: ";
+      aperture = safeInputDouble();
+      cout << "Введіть вагу: ";
+      weight = safeInputDouble();
+      cout << "Введіть мегапікселі: ";
+      megapixeles = safeInputDouble();
+      devices.insert(devices.begin(), make_unique<PhotoCamera>(
+                        modelName.c_str(), focal, aperture, weight, megapixeles, "Auto"));
+   }
+   else if (typeChoice == 2){
+      string modelName;
+      double focal, aperture, weight;
+      cout << "Введіть модель: ";
+      cin >> modelName;
+      cout << "Введіть фокусну відстань: ";
+      focal = safeInputDouble();
+      cout << "Введіть апертуру: ";
+      aperture = safeInputDouble();
+      cout << "Введіть вагу: ";
+      weight = safeInputDouble();
+      devices.insert(devices.begin(), make_unique<OpticalDevice>(
+                        modelName.c_str(), focal, aperture, weight));
+   }
+   else{ cout << "Невирный тып прыстрою"; }
+}
+
+void CameraController::addDeviceBack(){
+   view.showTypeMenu();
+   int typeChoice = safeInputInt();
+   if (typeChoice == 1){
+      string modelName;
+      double focal, aperture, weight, megapixeles;
+      cout << "Введіть модель: ";
+      cin >> modelName;
+      cout << "Введіть фокусну відстань: ";
+      focal = safeInputDouble();
+      cout << "Введіть апертуру: ";
+      aperture = safeInputDouble();
+      cout << "Введіть вагу: ";
+      weight = safeInputDouble();
+      cout << "Введіть мегапікселі: ";
+      megapixeles = safeInputDouble();
+      devices.push_back(make_unique<PhotoCamera>(
+         modelName.c_str(), focal, aperture, weight, megapixeles, "Auto"));
+   }
+   else if (typeChoice == 2){
+      string modelName;
+      double focal, aperture, weight;
+      cout << "Введіть модель: ";
+      cin >> modelName;
+      cout << "Введіть фокусну відстань: ";
+      focal = safeInputDouble();
+      cout << "Введіть апертуру: ";
+      aperture = safeInputDouble();
+      cout << "Введіть вагу: ";
+      weight = safeInputDouble();
+      devices.push_back(make_unique<OpticalDevice>(
+         modelName.c_str(), focal, aperture, weight));
+   }
+   else{ cout << "Невирный тып прыстрою"; }
+}
+
+void CameraController::addDeviceAtPosition(){
+   cout << "Введіть позицію (0-" << devices.size() << "): ";
+   int pos = safeInputInt();
+   if (pos < 0 || pos > devices.size()){
+      cout << "Невірна позиція.\n";
+      return;
+   }
+   view.showTypeMenu();
+   int typeChoice = safeInputInt();
+   if (typeChoice == 1){
+      string modelName;
+      double focal, aperture, weight, megapixeles;
+      cout << "Введіть модель: ";
+      cin >> modelName;
+      cout << "Введіть фокусну відстань: ";
+      focal = safeInputDouble();
+      cout << "Введіть апертуру: ";
+      aperture = safeInputDouble();
+      cout << "Введіть вагу: ";
+      weight = safeInputDouble();
+      cout << "Введіть мегапікселі: ";
+      megapixeles = safeInputDouble();
+      devices.insert(devices.begin() + pos, make_unique<PhotoCamera>(
+                        modelName.c_str(), focal, aperture, weight, megapixeles, "Auto"));
+   }
+   else if (typeChoice == 2){
+      string modelName;
+      double focal, aperture, weight;
+      cout << "Введіть модель: ";
+      cin >> modelName;
+      cout << "Введіть фокусну відстань: ";
+      focal = safeInputDouble();
+      cout << "Введіть апертуру: ";
+      aperture = safeInputDouble();
+      cout << "Введіть вагу: ";
+      weight = safeInputDouble();
+      devices.insert(devices.begin() + pos, make_unique<OpticalDevice>(
+                        modelName.c_str(), focal, aperture, weight));
+   }
+   else{ cout << "Невірний тип пристрою"; }
+}
+
+// Допоміжна функція для порівняння рядків нечутливо до регістру
+bool caseInsensitiveCompare(const string& a, const string& b){
+   string lowerA, lowerB;
+   lowerA.resize(a.size());
+   lowerB.resize(b.size());
+   transform(a.begin(), a.end(), lowerA.begin(), ::tolower);
+   transform(b.begin(), b.end(), lowerB.begin(), ::tolower);
+   return lowerA < lowerB;
+}
+
+void CameraController::findDeviceByCriteria(){
+   std::cout << "Введіть назву модели для пошуку: ";
+   cin.ignore(10000, '\n');
+   string modelName;
+   getline(cin, modelName);
+   bool found = false;
+   for (const auto& device : devices){
+      if (caseInsensitiveCompare(device->getModelName(), modelName)){
+         device->printInfo();
+         found = true;
+         break;
+      }
+      if (!found){ cout << "Пристрої " << modelName << " не знайдено!"; }
+   }
+}
+
+void CameraController::sortDeviceByAttribute(){
+   std::sort(devices.begin(), devices.end(), [](const auto& a, const auto& b){
+      return a->getModelName() < b->getModelName();
+   });
+   std::cout << "\nПристрої відсортовано за назвою.\n";
+   displayDevices();
+}
+
+void CameraController::displayDevices(){
+   if (devices.empty()){
+      cout << "\n-Контейнер порожній-\n";
+      return;
+   }
+   for (const auto& device : devices){
+      // cout << "Пристрій " << device << endl;
+      device->printInfo();
+   }
 }

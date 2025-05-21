@@ -1,7 +1,7 @@
 #ifndef OPTICALDEVICE_H
 #define OPTICALDEVICE_H
 
-#include "DeviceBase.h"
+#include "../DeviceBase.h"
 
 class OpticalDevice : public OpticalBase {
 protected:
@@ -20,6 +20,7 @@ public:
    static void set_max_zoom_level(double level);
    static double get_max_zoom_level();
    void adjustZoom(double level_zoom);
+   double getFocusLength() const;
 };
 
 

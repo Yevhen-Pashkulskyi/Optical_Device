@@ -4,7 +4,7 @@
 
 #include "entity/DeviceBase.h"
 #include  "control/CameraController.h"
-#include "entity/PhotoCamera.h"
+#include "entity/extends/PhotoCamera.h"
 
 int main() {
    PhotoCamera camera("Canon", 50, 35, 800, 24.1, "Auto");

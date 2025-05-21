@@ -19,6 +19,7 @@ public:
    void configureDevice() override;
    void capturePhoto() const;
    void setShootingMode(const char *mode);
+   double getMegapixels() const;
 };
 
 

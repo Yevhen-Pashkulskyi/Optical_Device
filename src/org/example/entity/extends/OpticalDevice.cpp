@@ -50,14 +50,14 @@ void OpticalDevice::displayImage(const std::string& info) const
 
 void OpticalDevice::printInfo() const
 {
-    std::cout << "Модель: " << modelName << "\n"
+    std::cout << "\nМодель: " << modelName << "\n"
               << "Фокусна відстань: " << focalLength << " мм\n"
               << "Апертура: " << aperture << " мм\n"
               << "Вага: " << weight << " г\n"
               << "Стан: " << (isPoweredOn ? "Увімкнено" : "Вимкнено") << "\n"
               << "Поточний рівень збільшення: " << currentZoom << "x\n";
     double fNumber = focalLength / aperture;
-    std::cout << "Світлосила (f-number): f/" << fNumber << "\n" << std::endl;
+    std::cout << "Світлосила (f-number): f/" << fNumber << std::endl;
 }
 
 void OpticalDevice::configureDevice()

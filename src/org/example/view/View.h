@@ -4,8 +4,10 @@
 class View {
 public:
    // void show_menu_device();
-   void show_menu_camera();
-   void show_menu_camera_shoting_mode();
+   void showMenuCamera();
+   void showMenuCameraShootingMode();
+   void showTypeMenu();
+   void showMenuAddedDevice();
 };
 
 #endif //VIEW_H

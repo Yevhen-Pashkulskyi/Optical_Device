@@ -48,3 +48,7 @@ void OpticalBase::displayImage(const std::string& info) const
         std::cout << "Неможливо відобразити: пристрій вимкнений." << std::endl;
     }
 }
+
+std::string OpticalBase::getModelName() const{
+    return std::string(modelName);
+}

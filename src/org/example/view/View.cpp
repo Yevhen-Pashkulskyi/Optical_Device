@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-void View::show_menu_camera(){
+void View::showMenuCamera(){
    cout << "\n=== Меню управління камерою ===\n"
       << "1. Увімкнути камеру\n"
       << "2. Вимкнути камеру\n"
@@ -17,10 +17,29 @@ void View::show_menu_camera(){
       << "Оберіть дію: ";
 }
 
-void View::show_menu_camera_shoting_mode(){
+void View::showMenuCameraShootingMode(){
    cout << "Оберіть режим зйомки:\n"
       << "  1 - Auto\n"
       << "  2 - Portrait\n"
       << "  3 - Night\n"
       << "Введіть номер: ";
+}
+
+void View::showTypeMenu(){
+   cout << "Введіть тип пристрою\n"
+      "1 - PhotoCamera\n"
+      "2 - OpticalDevice\n"
+      "Пристрій №: ";
+}
+
+void View::showMenuAddedDevice(){
+   cout << "\n=== Меню додавання пристрою ===\n"
+      << "1. Додати пристрій на початок\n"
+      << "2. Додати пристрій в кінець\n"
+      << "3. Додати пристрій на позицію\n"
+      << "4. Знайти пристрій\n"
+      << "5. Сортувати пристрої\n"
+      << "6. Список пристроїв\n"
+      << "0. Вийти\n"
+      << "Оберіть дію: ";
 }

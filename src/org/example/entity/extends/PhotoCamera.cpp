@@ -68,7 +68,7 @@ void PhotoCamera::printInfo() const
         quality = "невідома";
     }
     std::cout << "Мегапікселі: " << megapixels << " MP\n"
-              << "Режим зйомки: " << shootingMode << " (якість: " << quality << ")\n" << std::endl;
+              << "Режим зйомки: " << shootingMode << " (якість: " << quality << ")" << std::endl;
 }
 
 void PhotoCamera::configureDevice()
@@ -109,4 +109,8 @@ void PhotoCamera::setShootingMode(const char *mode)
     shootingMode = new char[strlen(mode) + 1];
     strcpy(shootingMode, mode);
     std::cout << "Режим зйомки змінено на: " << shootingMode << std::endl;
+}
+
+double PhotoCamera::getMegapixels() const{
+    return megapixels;
 }
