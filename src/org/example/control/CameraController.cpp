@@ -120,35 +120,17 @@ void CameraController::handleDisplayDevices(){ displayDevices(); }
 void CameraController::addDeviceFront(){
    view.showTypeMenu();
    int typeChoice = safeInputInt();
+   auto input = inputDataPhotoCamera();
+
    if (typeChoice == 1){
-      string modelName;
-      double focal, aperture, weight, megapixeles;
-      cout << "Введіть модель: ";
-      cin >> modelName;
-      cout << "Введіть фокусну відстань: ";
-      focal = safeInputDouble();
-      cout << "Введіть апертуру: ";
-      aperture = safeInputDouble();
-      cout << "Введіть вагу: ";
-      weight = safeInputDouble();
-      cout << "Введіть мегапікселі: ";
-      megapixeles = safeInputDouble();
       devices.insert(devices.begin(), make_unique<PhotoCamera>(
-                        modelName.c_str(), focal, aperture, weight, megapixeles, "Auto"));
+                        get<string>(input[0]).c_str(), get<double>(input[1]),
+                        get<double>(input[2]), get<double>(input[3]), get<double>(input[4]), "Auto"));
    }
    else if (typeChoice == 2){
-      string modelName;
-      double focal, aperture, weight;
-      cout << "Введіть модель: ";
-      cin >> modelName;
-      cout << "Введіть фокусну відстань: ";
-      focal = safeInputDouble();
-      cout << "Введіть апертуру: ";
-      aperture = safeInputDouble();
-      cout << "Введіть вагу: ";
-      weight = safeInputDouble();
       devices.insert(devices.begin(), make_unique<OpticalDevice>(
-                        modelName.c_str(), focal, aperture, weight));
+                        get<string>(input[0]).c_str(), get<double>(input[1]),
+                        get<double>(input[2]), get<double>(input[3])));
    }
    else{ cout << "Невирный тып прыстрою"; }
 }
@@ -156,35 +138,17 @@ void CameraController::addDeviceFront(){
 void CameraController::addDeviceBack(){
    view.showTypeMenu();
    int typeChoice = safeInputInt();
+   auto input = inputDataPhotoCamera();
+
    if (typeChoice == 1){
-      string modelName;
-      double focal, aperture, weight, megapixeles;
-      cout << "Введіть модель: ";
-      cin >> modelName;
-      cout << "Введіть фокусну відстань: ";
-      focal = safeInputDouble();
-      cout << "Введіть апертуру: ";
-      aperture = safeInputDouble();
-      cout << "Введіть вагу: ";
-      weight = safeInputDouble();
-      cout << "Введіть мегапікселі: ";
-      megapixeles = safeInputDouble();
       devices.push_back(make_unique<PhotoCamera>(
-         modelName.c_str(), focal, aperture, weight, megapixeles, "Auto"));
+         get<string>(input[0]).c_str(), get<double>(input[1]),
+         get<double>(input[2]), get<double>(input[3]), get<double>(input[4]), "Auto"));
    }
    else if (typeChoice == 2){
-      string modelName;
-      double focal, aperture, weight;
-      cout << "Введіть модель: ";
-      cin >> modelName;
-      cout << "Введіть фокусну відстань: ";
-      focal = safeInputDouble();
-      cout << "Введіть апертуру: ";
-      aperture = safeInputDouble();
-      cout << "Введіть вагу: ";
-      weight = safeInputDouble();
       devices.push_back(make_unique<OpticalDevice>(
-         modelName.c_str(), focal, aperture, weight));
+         get<string>(input[0]).c_str(), get<double>(input[1]),
+         get<double>(input[2]), get<double>(input[3])));
    }
    else{ cout << "Невирный тып прыстрою"; }
 }
@@ -198,35 +162,17 @@ void CameraController::addDeviceAtPosition(){
    }
    view.showTypeMenu();
    int typeChoice = safeInputInt();
+   auto input = inputDataPhotoCamera();
+
    if (typeChoice == 1){
-      string modelName;
-      double focal, aperture, weight, megapixeles;
-      cout << "Введіть модель: ";
-      cin >> modelName;
-      cout << "Введіть фокусну відстань: ";
-      focal = safeInputDouble();
-      cout << "Введіть апертуру: ";
-      aperture = safeInputDouble();
-      cout << "Введіть вагу: ";
-      weight = safeInputDouble();
-      cout << "Введіть мегапікселі: ";
-      megapixeles = safeInputDouble();
       devices.insert(devices.begin() + pos, make_unique<PhotoCamera>(
-                        modelName.c_str(), focal, aperture, weight, megapixeles, "Auto"));
+                        get<string>(input[0]).c_str(), get<double>(input[1]),
+                        get<double>(input[2]), get<double>(input[3]), get<double>(input[4]), "Auto"));
    }
    else if (typeChoice == 2){
-      string modelName;
-      double focal, aperture, weight;
-      cout << "Введіть модель: ";
-      cin >> modelName;
-      cout << "Введіть фокусну відстань: ";
-      focal = safeInputDouble();
-      cout << "Введіть апертуру: ";
-      aperture = safeInputDouble();
-      cout << "Введіть вагу: ";
-      weight = safeInputDouble();
       devices.insert(devices.begin() + pos, make_unique<OpticalDevice>(
-                        modelName.c_str(), focal, aperture, weight));
+                        get<string>(input[0]).c_str(), get<double>(input[1]),
+                        get<double>(input[2]), get<double>(input[3])));
    }
    else{ cout << "Невірний тип пристрою"; }
 }
@@ -277,7 +223,47 @@ void CameraController::displayDevices(){
       return;
    }
    for (const auto& device : devices){
-      // cout << "Пристрій " << device << endl;
       device->printInfo();
    }
+}
+
+vector<variant<string, double>> CameraController::inputDataPhotoCamera(){
+   vector<variant<string, double>> data;
+   string modelName;
+   double focal, aperture, weight, megapixeles;
+   cout << "Введіть модель: ";
+   cin >> modelName;
+   data.push_back(modelName);
+   cout << "Введіть фокусну відстань: ";
+   focal = safeInputDouble();
+   data.push_back(focal);
+   cout << "Введіть апертуру: ";
+   aperture = safeInputDouble();
+   data.push_back(aperture);
+   cout << "Введіть вагу: ";
+   weight = safeInputDouble();
+   data.push_back(weight);
+   cout << "Введіть мегапікселі: ";
+   megapixeles = safeInputDouble();
+   data.push_back(megapixeles);
+   return data;
+}
+
+vector<variant<string, double>> CameraController::inputDataOpticalDevice(){
+   vector<variant<string, double>> data;
+   string modelName;
+   double focal, aperture, weight;
+   cout << "Введіть модель: ";
+   cin >> modelName;
+   data.push_back(modelName);
+   cout << "Введіть фокусну відстань: ";
+   focal = safeInputDouble();
+   data.push_back(focal);
+   cout << "Введіть апертуру: ";
+   aperture = safeInputDouble();
+   data.push_back(aperture);
+   cout << "Введіть вагу: ";
+   weight = safeInputDouble();
+   data.push_back(weight);
+   return data;
 }

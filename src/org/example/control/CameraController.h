@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+using namespace std;
 
 class CameraController{
    PhotoCamera& camera;
@@ -36,6 +37,8 @@ private:
    void findDeviceByCriteria(); // пошук за певними критеріями
    void sortDeviceByAttribute(); // сортує за кокретинм атрібутом
    void displayDevices(); // вивід девайсів
+   vector<variant<string,double>> inputDataPhotoCamera();
+   vector<variant<std::string,double>> inputDataOpticalDevice();
 };
 
 #endif //CONTROLLER_H
