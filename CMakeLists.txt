@@ -8,8 +8,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(Optical_Device src/org/example/app.cpp
         src/org/example/entity/DeviceBase.cpp
         src/org/example/entity/DeviceBase.h
-        src/org/example/control/CameraController.cpp
-        src/org/example/control/CameraController.h
+        src/org/example/control/Controller.cpp
+        src/org/example/control/Controller.h
         src/org/example/view/View.cpp
         src/org/example/view/View.h
         src/org/example/entity/extends/OpticalDevice.cpp

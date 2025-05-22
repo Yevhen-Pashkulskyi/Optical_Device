@@ -8,14 +8,14 @@
 #include <string>
 using namespace std;
 
-class CameraController{
+class Controller{
    PhotoCamera& camera;
    OpticalBase* basePtr;
    View view;
-   std::vector<std::unique_ptr<OpticalBase>> devices; // контейнер для зберігання об'єктів
+   vector<unique_ptr<OpticalBase>> devices; // контейнер для зберігання об'єктів
 
 public:
-   CameraController(PhotoCamera& camera, OpticalBase* basePtr);
+   Controller(PhotoCamera& camera, OpticalBase* basePtr);
    int run();
 
 private:
