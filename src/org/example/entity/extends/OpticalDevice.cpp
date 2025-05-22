@@ -7,12 +7,12 @@
 double OpticalDevice::max_zoom_level = 5.0;
 
 OpticalDevice::OpticalDevice(const char* model, double focal, double ap, double wt)
-    : OpticalBase(model, focal, ap, wt), currentZoom(0.0)
+    : DeviceBase(model, focal, ap, wt), currentZoom(0.0)
 {
 }
 
 OpticalDevice::OpticalDevice(const OpticalDevice& other, const char* name)
-    : OpticalBase(other, name), currentZoom(other.currentZoom)
+    : DeviceBase(other, name), currentZoom(other.currentZoom)
 {
 }
 

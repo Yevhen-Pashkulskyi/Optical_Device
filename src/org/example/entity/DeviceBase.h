@@ -1,5 +1,5 @@
 /**
- * Цей файл для оголошення абстрактного класу OpticalBase
+ * Цей файл для оголошення абстрактного класу DeviceBase
  */
 
 #ifndef DEVICE_H
@@ -7,7 +7,7 @@
 
 #include <string>
 
-class OpticalBase {
+class DeviceBase {
 protected:
     char *modelName; // назва девайсу
     double focalLength; // фокусна відстань
@@ -16,10 +16,10 @@ protected:
     bool isPoweredOn; // стан ввімкнено/вимкнено
 
 public:
-    OpticalBase(const char *model, double focalLength, double aperture, double wt);
-    OpticalBase(const OpticalBase &other, const char *name);
+    DeviceBase(const char *model, double focalLength, double aperture, double wt);
+    DeviceBase(const DeviceBase &other, const char *name);
     // віртуальні методи
-    virtual ~OpticalBase(); // деструткор
+    virtual ~DeviceBase(); // деструткор
     virtual std::string powerOn(); // метод включення
     virtual std::string powerOff(); // метод виключення
     virtual void displayImage(const std::string &info) const; // метод відображення емітація екрану

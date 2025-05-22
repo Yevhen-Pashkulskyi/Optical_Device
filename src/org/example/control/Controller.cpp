@@ -9,7 +9,7 @@
 #include "../view/View.h"
 using namespace std;
 
-Controller::Controller(PhotoCamera& camera, OpticalBase* basePtr):
+Controller::Controller(PhotoCamera& camera, DeviceBase* basePtr):
    camera(camera), basePtr(basePtr){
 }
 

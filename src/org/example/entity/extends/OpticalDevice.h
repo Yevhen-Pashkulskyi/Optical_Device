@@ -3,7 +3,7 @@
 
 #include "../DeviceBase.h"
 
-class OpticalDevice : public OpticalBase {
+class OpticalDevice : public DeviceBase {
 protected:
    double currentZoom; // поточний рівень збільшення
    static double max_zoom_level; // максимальне збільшення

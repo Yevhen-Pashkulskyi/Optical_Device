@@ -10,12 +10,12 @@ using namespace std;
 
 class Controller{
    PhotoCamera& camera;
-   OpticalBase* basePtr;
+   DeviceBase* basePtr;
    View view;
-   vector<unique_ptr<OpticalBase>> devices; // контейнер для зберігання об'єктів
+   vector<unique_ptr<DeviceBase>> devices; // контейнер для зберігання об'єктів
 
 public:
-   Controller(PhotoCamera& camera, OpticalBase* basePtr);
+   Controller(PhotoCamera& camera, DeviceBase* basePtr);
    int run();
 
 private:

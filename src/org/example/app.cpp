@@ -8,7 +8,7 @@
 
 int main() {
    PhotoCamera camera("Canon", 50, 35, 800, 24.1, "Auto");
-   OpticalBase* basePtr = &camera;
+   DeviceBase* basePtr = &camera;
    Controller controller(camera, basePtr);
    controller.run();
    return 0;
