@@ -1,0 +1,9 @@
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/OpticalProject.dir
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/list_install_components.dir
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/install.dir
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/install/local.dir
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/install/strip.dir
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/OpticalProject_autogen_timestamp_deps.dir
+/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/OpticalProject_autogen.dir
