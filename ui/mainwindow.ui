@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1012</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Optical-Device</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="layoutWidget">
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>781</width>
+      <width>991</width>
       <height>431</height>
      </rect>
     </property>
@@ -55,6 +55,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="btnChangeZoom">
+         <property name="text">
+          <string>Змінити збільшення</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="btnDelete">
          <property name="text">
           <string>Видалити девайс</string>
@@ -62,6 +69,9 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit"/>
      </item>
      <item>
       <widget class="QTextEdit" name="textOutput">
@@ -85,7 +95,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1012</width>
      <height>24</height>
     </rect>
    </property>

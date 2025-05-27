@@ -16,8 +16,9 @@ public:
     OpticalDevice(QString model, double focal, double aperture, double weight);
     QString powerOn();
     QString powerOff();
-    void adjustZoom(double level);
+    QString adjustZoom(double level);
     QString getInfo() const;
+    QString getModelName() const;
 
     static void setMaxZoomLevel(double level);
     static double getMaxZoomLevel();

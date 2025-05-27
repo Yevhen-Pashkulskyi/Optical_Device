@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->btnCreate, &QPushButton::clicked, this, [=] {
         device = new OpticalDevice("SkyWatcher", 900, 100, 3000);
-        ui->textOutput->append("Об’єкт створено.");
+        ui->textOutput->append("✅" + device->getModelName() + " створено.");
     });
 
     connect(ui->btnPowerOn, &QPushButton::clicked, this, [=] {
@@ -30,11 +30,27 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->btnDelete, &QPushButton::clicked, this, [=] {
         if (device) {
+            ui->textOutput->append(device->getModelName() + " видалено.");
             delete device;
             device = nullptr;
-            ui->textOutput->append("Об’єкт видалено.");
         }
     });
+
+    connect(ui->btnChangeZoom, &QPushButton::clicked, this, [=] {
+       if (device) {
+           bool ok;
+           double zoomLevel = ui->lineEdit->text().toDouble(&ok);
+           if (ok) {
+               QString message = device->adjustZoom(zoomLevel); // <-- теперь возвращает сообщение
+               ui->textOutput->append(message);
+           } else {
+               ui->textOutput->append("❌ Помилка: введіть коректне число для збільшення.");
+           }
+       } else {
+           ui->textOutput->append("❌ Пристрій не створено.");
+       }
+   });
+
 }
 
 MainWindow::~MainWindow() {

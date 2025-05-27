@@ -13,9 +13,21 @@ QString OpticalDevice::powerOff() {
     return modelName + " вимкнено.";
 }
 
-void OpticalDevice::adjustZoom(double level) {
-    if (isPoweredOn) {
-        currentZoom = std::clamp(level, 1.0, max_zoom_level);
+QString OpticalDevice::adjustZoom(double level) {
+    if (!isPoweredOn) {
+        return "❌ Неможливо змінити збільшення: пристрій вимкнений.";
+    }
+
+    double oldZoom = currentZoom;
+    if (level > max_zoom_level) {
+        currentZoom = max_zoom_level;
+        return QString("⚠️ Введене збільшення перевищує максимум. Встановлено максимальне значення: %1x").arg(currentZoom);
+    } else if (level < 1.0) {
+        currentZoom = 1.0;
+        return "⚠️ Мінімальне допустиме збільшення — 1.0x. Встановлено 1.0x.";
+    } else {
+        currentZoom = level;
+        return QString("✅ Збільшення змінено на %1x").arg(currentZoom);
     }
 }
 
@@ -27,6 +39,10 @@ QString OpticalDevice::getInfo() const {
         .arg(weight)
         .arg(isPoweredOn ? "Увімкнено" : "Вимкнено")
         .arg(currentZoom);
+}
+
+QString OpticalDevice::getModelName() const{
+    return modelName;
 }
 
 void OpticalDevice::setMaxZoomLevel(double level) {
