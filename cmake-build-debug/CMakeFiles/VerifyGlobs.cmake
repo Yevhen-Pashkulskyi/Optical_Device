@@ -43,6 +43,8 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/*.cpp")
 set(OLD_GLOB
   "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+  "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/OpticalProject_autogen/WTNNEUUVOU/moc_mainwindow.cpp"
+  "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/OpticalProject_autogen/mocs_compilation.cpp"
   "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/entity/opticaldevice.cpp"
   "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/main.cpp"
   "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/qt/mainwindow.cpp"
@@ -64,6 +66,8 @@ endif()
 # _directory_contents at /Volumes/trancend/macOS/programs/it/qt/6.9.0/macos/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/*.h")
 set(OLD_GLOB
+  "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/OpticalProject_autogen/moc_predefs.h"
+  "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/OpticalProject_autogen/ui/ui_mainwindow.h"
   "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/cmake-build-debug/ui_MainWindow.h"
   "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/include/opticaldevice.h"
   "/Volumes/trancend/learn/it/C++/Polytechic/Lab/02-03/Optical-Device/qt/mainwindow.h"
