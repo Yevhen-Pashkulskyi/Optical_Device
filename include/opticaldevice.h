@@ -8,7 +8,7 @@ class OpticalDevice {
     double focalLength;
     double aperture;
     double weight;
-    bool isPoweredOn = false;
+    bool isPowerStatus = false;
     double currentZoom = 1.0;
     inline static double max_zoom_level = 5.0;
 
@@ -19,6 +19,7 @@ public:
     QString adjustZoom(double level);
     QString getInfo() const;
     QString getModelName() const;
+    bool getPowerStatus() const;
 
     static void setMaxZoomLevel(double level);
     static double getMaxZoomLevel();

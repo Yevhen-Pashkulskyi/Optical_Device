@@ -4,18 +4,18 @@ OpticalDevice::OpticalDevice(QString model, double focal, double aperture, doubl
     : modelName(model), focalLength(focal), aperture(aperture), weight(weight) {}
 
 QString OpticalDevice::powerOn() {
-    isPoweredOn = true;
-    return modelName + " увімкнено.";
+    isPowerStatus = true;
+    return modelName + "🟢 увімкнено.";
 }
 
 QString OpticalDevice::powerOff() {
-    isPoweredOn = false;
-    return modelName + " вимкнено.";
+    isPowerStatus = false;
+    return modelName + "🔴 вимкнено.";
 }
 
 QString OpticalDevice::adjustZoom(double level) {
-    if (!isPoweredOn) {
-        return "❌ Неможливо змінити збільшення: пристрій вимкнений.";
+    if (!isPowerStatus) {
+        return "❗️ Неможливо змінити збільшення: пристрій вимкнений.";
     }
 
     double oldZoom = currentZoom;
@@ -32,17 +32,21 @@ QString OpticalDevice::adjustZoom(double level) {
 }
 
 QString OpticalDevice::getInfo() const {
-    return QString("Модель: %1\nФокус: %2\nАпертура: %3\nВага: %4 г\nСтан: %5\nЗбільшення: %6x")
+    return QString("\nМодель: %1\nФокус: %2\nАпертура: %3\nВага: %4 г\nСтан: %5\nЗбільшення: %6x")
         .arg(modelName)
         .arg(focalLength)
         .arg(aperture)
         .arg(weight)
-        .arg(isPoweredOn ? "Увімкнено" : "Вимкнено")
+        .arg(isPowerStatus ? "🟢 Увімкнено" : "🔴 Вимкнено")
         .arg(currentZoom);
 }
 
 QString OpticalDevice::getModelName() const{
     return modelName;
+}
+
+bool OpticalDevice::getPowerStatus() const{
+    return isPowerStatus;
 }
 
 void OpticalDevice::setMaxZoomLevel(double level) {
